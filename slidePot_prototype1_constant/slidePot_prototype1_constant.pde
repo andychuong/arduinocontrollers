@@ -89,7 +89,7 @@ void draw() {
   println("y: " + arduino.analogRead(ypin));
   fill(0,100,255);
   ellipse(x,y,diam,diam);
-  delay(100);
+
   if(arduino.analogRead(xpin) > 550){
     x+=5;
   }
