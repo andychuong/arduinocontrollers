@@ -95,9 +95,19 @@ void draw() {
       x+=5;
     }
   }
+  if(arduino.analogRead(xpin) > 750){
+    if(x<800+diam){
+      x+=7;
+    }
+  }
   if(arduino.analogRead(xpin) < 450){
     if(x > 0 ){
       x-=5;
+    }
+  }
+  if(arduino.analogRead(xpin) < 250){
+    if(x > 0 ){
+      x-=7;
     }
   }
   if(arduino.analogRead(ypin) > 550){
@@ -105,9 +115,19 @@ void draw() {
       y+=5;
     }
   }
+  if(arduino.analogRead(ypin) > 750){
+    if(y < 800 + diam){
+      y+=7;
+    }
+  }
   if(arduino.analogRead(ypin) < 450){
     if(y>0){
       y-=5;
+    }
+  }
+  if(arduino.analogRead(ypin) < 250){
+    if(y>0){
+      y-=7;
     }
   }
   fill(0,100,255);
