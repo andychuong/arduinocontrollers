@@ -90,36 +90,41 @@ void draw() {
   fill(0,100,255);
   ellipse(x,y,diam,diam);
 
+  //right
   if(arduino.analogRead(xpin) > 550){
-    if(x<800+diam){
+    if(x<800-(diam/2)){
       x+=5;
     }
   }
   if(arduino.analogRead(xpin) > 750){
-    if(x<800+diam){
+    if(x<800-(diam/2)){
       x+=7;
     }
   }
+  //left
   if(arduino.analogRead(xpin) < 450){
-    if(x > 0 ){
+    if(x > diam/2 ){
       x-=5;
     }
   }
   if(arduino.analogRead(xpin) < 250){
-    if(x > 0 ){
+    if(x > diam/2 ){
       x-=7;
     }
   }
+  
+  //down
   if(arduino.analogRead(ypin) > 550){
-    if(y < 800 + diam){
+    if(y < 800 - (diam/2)){
       y+=5;
     }
   }
   if(arduino.analogRead(ypin) > 750){
-    if(y < 800 + diam){
+    if(y < 800 - (diam/2)){
       y+=7;
     }
   }
+  //up
   if(arduino.analogRead(ypin) < 450){
     if(y>0){
       y-=5;
@@ -132,6 +137,5 @@ void draw() {
   }
   fill(0,100,255);
   ellipse(x,y,diam,diam);
-  //delay(100);
   
 }
