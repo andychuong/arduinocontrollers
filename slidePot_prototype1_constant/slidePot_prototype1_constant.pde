@@ -91,16 +91,24 @@ void draw() {
   ellipse(x,y,diam,diam);
 
   if(arduino.analogRead(xpin) > 550){
-    x+=5;
+    if(x<800+diam){
+      x+=5;
+    }
   }
   if(arduino.analogRead(xpin) < 450){
-    x-=5;
+    if(x > 0 ){
+      x-=5;
+    }
   }
   if(arduino.analogRead(ypin) > 550){
-    y+=5;
+    if(y < 800 + diam){
+      y+=5;
+    }
   }
   if(arduino.analogRead(ypin) < 450){
-    y-=5;
+    if(y>0){
+      y-=5;
+    }
   }
   fill(0,100,255);
   ellipse(x,y,diam,diam);
