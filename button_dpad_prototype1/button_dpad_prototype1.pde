@@ -94,16 +94,24 @@ void draw() {
   ellipse(x,y,diam,diam);
 
   if(arduino.digitalRead(rightpin) == Arduino.HIGH){
-    x+=5;
+    if(x<800+diam){
+      x+=5;
+    }
   }
   if(arduino.digitalRead(leftpin) == Arduino.HIGH){
-    x-=5;
+    if(x > 0 ){
+      x-=5;
+    }
   }
   if(arduino.digitalRead(uppin) == Arduino.HIGH){
-    y-=5;
+    if(y>0){
+      y-=5;
+    }
   }
   if(arduino.digitalRead(downpin) == Arduino.HIGH){
-    y+=5;
+    if(y < 800 + diam){
+      y+=5;
+    }
   }
   fill(0,100,255);
   ellipse(x,y,diam,diam);
