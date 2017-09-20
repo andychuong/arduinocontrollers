@@ -42,12 +42,17 @@ int diam;
 int ypin= 0;
 int xpin= 1;
 
+int sizeX = 2000;
+int sizeY = 1500;
+
 
 void setup() {
-  size(800 , 800);
+  sizeX = 2000;
+  sizeY = 1500;
+  size(2000 , 1500);
   diam = 100; 
-  x = 400 -(diam/2);
-  y = 400 - (diam/2);
+  x = sizeX -(diam/2);
+  y = sizeY - (diam/2);
 
   // Prints out the available serial ports.
   println(Arduino.list());
@@ -92,12 +97,12 @@ void draw() {
 
   //right
   if(arduino.analogRead(xpin) > 550){
-    if(x<800-(diam/2)){
+    if(x<sizeX-(diam/2)){
       x+=5;
     }
   }
   if(arduino.analogRead(xpin) > 750){
-    if(x<800-(diam/2)){
+    if(x<sizeX-(diam/2)){
       x+=7;
     }
   }
@@ -115,23 +120,23 @@ void draw() {
   
   //down
   if(arduino.analogRead(ypin) > 550){
-    if(y < 800 - (diam/2)){
+    if(y < sizeY - (diam/2)){
       y+=5;
     }
   }
   if(arduino.analogRead(ypin) > 750){
-    if(y < 800 - (diam/2)){
+    if(y < sizeY - (diam/2)){
       y+=7;
     }
   }
   //up
   if(arduino.analogRead(ypin) < 450){
-    if(y>0){
+    if(y> diam/2){
       y-=5;
     }
   }
   if(arduino.analogRead(ypin) < 250){
-    if(y>0){
+    if(y>diam/2){
       y-=7;
     }
   }
