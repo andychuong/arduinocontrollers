@@ -42,15 +42,13 @@ int diam;
 int ypin= 0;
 int xpin= 1;
 
-int sizeX = 2000;
-int sizeY = 1500;
+int sizeX = 3500;
+int sizeY = 2000;
 
 
 void setup() {
-  sizeX = 2000;
-  sizeY = 1500;
-  size(2000 , 1500);
-  diam = 50; 
+  size(3500 , 2000);
+  diam = 100; 
   x = sizeX -(diam/2);
   y = sizeY - (diam/2);
 
@@ -108,7 +106,7 @@ void draw() {
   }
   if(arduino.analogRead(xpin) > 950){
     if(x<sizeX-(diam/2)){
-      x+=9;
+      x+=11;
     }
   }
   
@@ -125,7 +123,7 @@ void draw() {
   }
   if(arduino.analogRead(xpin) < 150){
     if(x > diam/2 ){
-      x-=9;
+      x-=11;
     }
   }
   
@@ -142,7 +140,7 @@ void draw() {
   }
   if(arduino.analogRead(ypin) > 950){
     if(y < sizeY - (diam/2)){
-      y+=9;
+      y+=11;
     }
   }
   
@@ -159,7 +157,7 @@ void draw() {
   }
   if(arduino.analogRead(ypin) < 150){
     if(y>diam/2){
-      y-=9;
+      y-=11;
     }
   }
   fill(0,100,255);
