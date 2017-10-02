@@ -1,12 +1,36 @@
+const int buttonPin = 2;
+
 void setup() {
- Serial.begin(9600); // initialize serial communications
+  Serial.begin(9600);
+  while (Serial.available() <= 0) {
+    Serial.println("hello"); // send a starting message
+    delay(300);              // wait 1/3 second
+  }
+  pinMode(buttonPin, INPUT_PULLUP);
 }
  
+
 void loop() {
- int horiz = analogRead(A0);// read the input pin
- int vert = analogRead(A1);
- int mappedH = map(horiz, 0, 1023, 0, 255); // remap the pot value to fit in 1 byte
- int mappedV = map(vert, 0, 1023, 0, 255);
- Serial.write(mappedH + mappedV);                             // print it out the serial port
- delay(1);                                            // slight delay to stabilize the ADC
+   // read the X axis:
+   int sensorValue = analogRead(A0);
+   if (Serial.available() > 0) {
+    // read the incoming byte:
+    int inByte = Serial.read();
+    // read the sensor:
+    sensorValue = analogRead(A0);
+    // print the results:
+    Serial.print(sensorValue);
+    Serial.print(",");
+ 
+    // read the sensor:
+    sensorValue = analogRead(A1);
+    // print the results:
+    Serial.print(sensorValue);
+    Serial.print(",");
+ 
+    // read the sensor:
+    sensorValue = digitalRead(buttonPin);
+    // print the results:
+    Serial.println(sensorValue);
+  }
 }
