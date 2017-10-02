@@ -34,10 +34,16 @@ function serialEvent() {
     if (inString !== 'hello') {           // if you get hello, ignore it
       var sensors = split(inString, ','); // split the string on the commas
       if (sensors.length > 2) { // if there are three elements
-        locH = map(sensors[0], 1024, 410, 0, width); // element 0 is the locH
+        locH = map(sensors[0], 0, 1024, 0, width); // element 0 is the locH
         console.log("H :" + locH);
-        locV = map(sensors[1], 1024, 410, 0, height); // element 1 is the locV
+        locV = map(sensors[1], 0, 1024, 0, height); // element 1 is the locV
         console.log("V :" + locV);
+        if(sensors[2] == 0){
+          circleColor = 100;
+        }
+        if(sensors[2] == 1){
+          circleColor = 255;
+        }
         // circleColor = 255 - (sensors[2] * 255);      // element 2 is the button
       }
     }
