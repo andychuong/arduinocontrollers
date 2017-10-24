@@ -42,9 +42,9 @@ void loop() {
       int analog1 = analogRead(A1);
       int analog2 = analogRead(A2);
         //ANALOG Controller 2
-      int analog0 = analogRead(A3);
-      int analog1 = analogRead(A4);
-      int analog2 = analogRead(A5);
+      int analog3 = analogRead(A3);
+      int analog4 = analogRead(A4);
+      int analog5 = analogRead(A5);
         //DIGITAL Controller 1
       int digital2 = digitalRead(dig2);
       int digital3 = digitalRead(dig3);
@@ -65,6 +65,12 @@ void loop() {
         Serial.print(",");
       Serial.print(analog2);
         Serial.print(",");
+      Serial.print(analog3);
+        Serial.print(",");
+      Serial.print(analog4);
+        Serial.print(",");
+      Serial.print(analog5);
+        Serial.print(",");
   
       Serial.print(digital2);
         Serial.print(",");
@@ -76,7 +82,16 @@ void loop() {
         Serial.print(",");
       Serial.print(digital6);
         Serial.print(",");
-      Serial.println(digital7);
+      Serial.print(digital7);
+        Serial.print(",");
+      Serial.print(digital8);
+        Serial.print(",");
+      Serial.print(digital9);
+        Serial.print(",");
+      Serial.print(digital10);
+        Serial.print(",");
+      Serial.println(digital11);
+
  
   }
 }
