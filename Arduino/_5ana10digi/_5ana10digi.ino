@@ -91,7 +91,5 @@ void loop() {
       Serial.print(digital10);
         Serial.print(",");
       Serial.println(digital11);
-
- 
   }
 }

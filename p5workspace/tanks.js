@@ -174,7 +174,7 @@ function draw() {
 		player1.position.x = x1;
 		player1.position.y = y1;
 
-		// Player 1 Shooting
+		// Player 1 Shooting @@@@@@@@@@@
 		if(keyWentDown("x")){
 			// console.log('x');
 	   		var bullet1 = createSprite(player1.position.x, player1.position.y, 10, 10);
@@ -188,7 +188,7 @@ function draw() {
 		player2.position.x = x2;
 		player2.position.y = y2;
 
-		// Player 2 Shooting
+		// Player 2 Shooting @@@@@@@@@@@
 	    if(keyWentDown("c")){
 	    	// console.log('c pressed');
 	   		var bullet2 = createSprite(player2.position.x, player2.position.y, 10, 10);
@@ -295,18 +295,18 @@ function serialEvent() {
   //Guide 1:
   //A0 ~ [0]: Horiz (x)
   //A1 ~ [1]: Verti (y)
-  //D2 ~ [3]: Joystick Button
-  //D3 ~ [4]: Blue Button (Shoot)
-  //D4 ~ [5]: Red Button (Reload)
-  //D5 ~ [6]: Small Button (Reset)
+  //D2 ~ [6]: Joystick Button - ??
+  //D3 ~ [7]: Blue Button (Shoot)
+  //D4 ~ [8]: Red Button (Reload)
+  //D5 ~ [9]: Small Button (Reset)
 
   //Guide 2:
-  //A3 ~ []: Horiz (x)
-  //A4 ~ []: Verti (y)
-  //D7 ~ []: Joystick Button - ??
-  //D8 ~ []: Blue Button (Shoot)
-  //D9 ~ []: Red Button (Reload)
-  //D10 ~ []: Small Button (Reset)
+  //A3 ~ [3]: Horiz (x)
+  //A4 ~ [4]: Verti (y)
+  //D7 ~ [11]: Joystick Button - ??
+  //D8 ~ [12]: Blue Button (Shoot)
+  //D9 ~ [13]: Red Button (Reload)
+  //D10 ~ [14]: Small Button (Reset)
   
   var inString = serial.readStringUntil('\r\n');
   //check to see that there's actually a string there:
@@ -314,18 +314,11 @@ function serialEvent() {
     if (inString !== 'hello') {           // if you get hello, ignore it
       var sensors = split(inString, ','); // split the string on the commas
       if (sensors.length > 2) { // if there are three elements
-        locH = map(sensors[0], 0, 1024, 0, width); // element 0 is the locH
-        // console.log("H :" + locH);
-        locV = map(sensors[1], 0, 1024, 0, height); // element 1 is the locV
-        
-        // console.log("V :" + locV);
-        // if(sensors[2] == 0){
-        //   circleColor = 100;
-        // }
-        // if(sensors[2] == 1){
-        //   circleColor = 255;
-        // }
-        // circleColor = 255 - (sensors[2] * 255);      // element 2 is the button
+        sensorX1 = sensors[0];
+        sensorY1 = sensors[1];
+
+        sensorX2 = sensors[3];
+        sensorY2 = sensors[4];
       }
     }
     serial.write('x'); // send a byte requesting more serial data 
