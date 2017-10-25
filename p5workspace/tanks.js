@@ -314,11 +314,41 @@ function serialEvent() {
     if (inString !== 'hello') {           // if you get hello, ignore it
       var sensors = split(inString, ','); // split the string on the commas
       if (sensors.length > 2) { // if there are three elements
+      	//Close serial port -> small button
+        if(sensors[9] == 1){
+        	serial.close(portName);
+        }
+        //Update player 1 x,y
         sensorX1 = sensors[0];
         sensorY1 = sensors[1];
 
+        //Player 1 shoot
+        if(sensors[7] == 1){
+
+        }
+
+        //Player 1 reload
+        if(sensors[8] == 1){
+
+        }
+
+        //Close serial port -> small button
+        if(sensors[14] == 1){
+        	serial.close(portName);
+        }
+        //update player 2 x,y
         sensorX2 = sensors[3];
         sensorY2 = sensors[4];
+
+        //Player 2 shoot
+        if(sensors[12] == 1){
+
+        }
+        
+        //Player 2 reload
+        if(sensors[13] == 1){
+
+        }
       }
     }
     serial.write('x'); // send a byte requesting more serial data 
