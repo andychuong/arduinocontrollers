@@ -277,41 +277,6 @@ function draw() {
 
 }
 
-function serialEvent() {
-  // read a string from the serial port
-  // until you get createSpriteriage return and newline:
-
-  //Guide:
-  //A0: Horiz (x)
-  //A1: Verti (y)
-  //D2: Joystick Button
-  //D3: Blue Button (Shoot)
-  //D4: Red Button (Reload)
-  //D5: Small Button (Reset)
-  
-  var inString = serial.readStringUntil('\r\n');
-  //check to see that there's actually a string there:
-  if (inString.length > 0) {
-    if (inString !== 'hello') {           // if you get hello, ignore it
-      var sensors = split(inString, ','); // split the string on the commas
-      if (sensors.length > 2) { // if there are three elements
-        locH = map(sensors[0], 0, 1024, 0, width); // element 0 is the locH
-        console.log("H :" + locH);
-        locV = map(sensors[1], 0, 1024, 0, height); // element 1 is the locV
-        console.log("V :" + locV);
-        if(sensors[2] == 0){
-          circleColor = 100;
-        }
-        if(sensors[2] == 1){
-          circleColor = 255;
-        }
-        // circleColor = 255 - (sensors[2] * 255);      // element 2 is the button
-      }
-    }
-    serial.write('x'); // send a byte requesting more serial data 
-  }
-}
-
 function oneHitTwo(bullet1){
 	// player2.shapeColor = "orange";
 	points1++;
@@ -321,6 +286,50 @@ function oneHitTwo(bullet1){
 function twoHitOne(bullet2){
 	points2++;
 	bullet2.remove();
+}
+
+function serialEvent() {
+  // read a string from the serial port
+  // until you get createSpriteriage return and newline:
+
+  //Guide 1:
+  //A0 ~ [0]: Horiz (x)
+  //A1 ~ [1]: Verti (y)
+  //D2 ~ [3]: Joystick Button
+  //D3 ~ [4]: Blue Button (Shoot)
+  //D4 ~ [5]: Red Button (Reload)
+  //D5 ~ [6]: Small Button (Reset)
+
+  //Guide 2:
+  //A3 ~ []: Horiz (x)
+  //A4 ~ []: Verti (y)
+  //D7 ~ []: Joystick Button - ??
+  //D8 ~ []: Blue Button (Shoot)
+  //D9 ~ []: Red Button (Reload)
+  //D10 ~ []: Small Button (Reset)
+  
+  var inString = serial.readStringUntil('\r\n');
+  //check to see that there's actually a string there:
+  if (inString.length > 0) {
+    if (inString !== 'hello') {           // if you get hello, ignore it
+      var sensors = split(inString, ','); // split the string on the commas
+      if (sensors.length > 2) { // if there are three elements
+        locH = map(sensors[0], 0, 1024, 0, width); // element 0 is the locH
+        // console.log("H :" + locH);
+        locV = map(sensors[1], 0, 1024, 0, height); // element 1 is the locV
+        
+        // console.log("V :" + locV);
+        // if(sensors[2] == 0){
+        //   circleColor = 100;
+        // }
+        // if(sensors[2] == 1){
+        //   circleColor = 255;
+        // }
+        // circleColor = 255 - (sensors[2] * 255);      // element 2 is the button
+      }
+    }
+    serial.write('x'); // send a byte requesting more serial data 
+  }
 }
 
 function updateValues(){ // update sketch.js variables with sensor data
@@ -413,6 +422,13 @@ function updateValues(){ // update sketch.js variables with sensor data
 // 	});
 
 // }
+
+function closingCode(){
+	serial.close(portName);
+	return null;
+}
+
+window.onbeforeunload = closingCode;
 
 function windowResized(){
 	resizeCanvas(windowWidth,windowHeight);
