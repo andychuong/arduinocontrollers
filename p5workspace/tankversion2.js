@@ -144,6 +144,22 @@ function draw() {
     // updateValues();
 }
 
+  //Guide 1:
+  //A0 ~ [0]: Horiz (x)
+  //A1 ~ [1]: Verti (y)
+  //D2 ~ [6]: Joystick Button - ??
+  //D3 ~ [7]: Blue Button (Shoot)
+  //D4 ~ [8]: Red Button (Reload)
+  //D5 ~ [9]: Small Button (Reset)
+
+  //Guide 2:
+  //A3 ~ [3]: Horiz (x)
+  //A4 ~ [4]: Verti (y)
+  //D7 ~ [11]: Joystick Button - ??
+  //D8 ~ [12]: Blue Button (Shoot)
+  //D9 ~ [13]: Red Button (Reload)
+  //D10 ~ [14]: Small Button (Reset)
+
 //Interpret serial data here ----------
 function serialEvent() {
   // read a string from the serial port
@@ -156,9 +172,16 @@ function serialEvent() {
       if (sensors.length > 15) {           // if there are sixteen elements (6 analog, 10 digital)
       //Use sensor data here:
 
+      //Player 1:
       x1 = map(sensors[0], 0, 1024, 0, width); // element 0 is the locH
         console.log("H :" + x1);
       y1 = map(sensors[1], 0, 1024, 0, height); // element 1 is the locV
+        console.log("V :" + x2 + ", " + sensors[1]);
+
+      //Player 2:
+      x2 = map(sensors[3], 0, 1024, 0, width); // element 0 is the locH
+        console.log("H :" + x1);
+      y2 = map(sensors[4], 0, 1024, 0, height); // element 1 is the locV
         console.log("V :" + x2 + ", " + sensors[1]);
 
       }
