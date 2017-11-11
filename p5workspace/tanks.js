@@ -1,5 +1,5 @@
 // P5 STUFF
-var portName = 'COM3'; 
+var portName = 'COM5'; 
 
 var sensorX1;
 var sensorY1;
@@ -54,15 +54,15 @@ function setup() {
 	serial.list();                      // list the serial ports
 	serial.open(portName); 
 
-	gameState = 0;
+	gameState = 1;
 	wins = 5;
 
 	// Player 1
 	ready1 = false;
 	player1 = createSprite(400, 200, 50, 50);
 	// player1.shapeColor = 'blue';
-	blueTank = loadImage("assets/bluetank_small.png");
-	player1.addImage(blueTank);
+	// blueTank = loadImage("assets/bluetank_small.png");
+	// player1.addImage(blueTank);
 	x1 = 90;
 	y1 = 140;
 	bullets1 = new Group();
@@ -71,16 +71,15 @@ function setup() {
 	// Player 2
 	ready2 = false;
 	player2 = createSprite(400, 200, 50, 50);
-	greenTank = loadImage("assets/greentank_small.png");
-	greenTank2 = loadImage("assets/greentank_small2.png");
-	player2.addImage(greenTank);
+	// greenTank = loadImage("assets/greentank_small.png");
+	// greenTank2 = loadImage("assets/greentank_small2.png");
+	// player2.addImage(greenTank);
 	// player2.shapeColor = 'red';
 	x2 = windowWidth - 90;
 	y2 = windowHeight -93;
 	bullets2 = new Group();
 	points2 = 0;
 
-	heart = loadImage("assets/heart.png");
 
 }
 
@@ -207,11 +206,11 @@ function draw() {
 		hearts2 = wins - points1;
 
 		for(var i = 0; i < hearts1; i++){
-			image(heart, 50 + (22*i), windowHeight - 48);
+			// image(heart, 50 + (22*i), windowHeight - 48);
 		}
 
 		for(var j = 0; j < hearts2; j++){
-			image(heart, windowWidth - (70 + (22*j) ), windowHeight - 48);
+			// image(heart, windowWidth - (70 + (22*j) ), windowHeight - 48);
 		}
 		
 

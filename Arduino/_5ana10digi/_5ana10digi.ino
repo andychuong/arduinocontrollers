@@ -59,18 +59,18 @@ void loop() {
       int digital11 = digitalRead(dig11);
       
       // print the results:
-//      Serial.print(analog0); //[0]
-//        Serial.print(",");
-//      Serial.print(analog1); //[1]
-//        Serial.print(",");
-//      Serial.print(analog2); //[2]
-//        Serial.print(",");
-//      Serial.print(analog3); //[3]
-//        Serial.print(",");
-//      Serial.print(analog4); //[4]
-//        Serial.print(",");
-//      Serial.print(analog5); //[5]
-//        Serial.print(",");
+      Serial.print(analog0); //[0]
+        Serial.print(",");
+      Serial.print(analog1); //[1]
+        Serial.print(",");
+      Serial.print(analog2); //[2]
+        Serial.print(",");
+      Serial.print(analog3); //[3]
+        Serial.print(",");
+      Serial.print(analog4); //[4]
+        Serial.print(",");
+      Serial.print(analog5); //[5]
+        Serial.print(",");
   
       Serial.print(digital2); //[6]
         Serial.print(",");
@@ -88,8 +88,8 @@ void loop() {
         Serial.print(",");
       Serial.print(digital9); //[13]
         Serial.print(",");
-      Serial.println(digital10); //[14]
-//        Serial.print(",");
-//      Serial.println(digital11); //[15]
+      Serial.print(digital10); //[14]
+        Serial.print(",");
+      Serial.println(digital11); //[15]
   }
 }
