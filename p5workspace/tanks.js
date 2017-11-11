@@ -36,8 +36,8 @@ var gameState;
 // 2 = end 
 
 function preload() {
-   fontTitle = loadFont("assets/Bangers-Regular.ttf");
-   fontOther = loadFont("assets/SquadaOne-Regular.ttf");
+   // fontTitle = loadFont("assets/Bangers-Regular.ttf");
+   // fontOther = loadFont("assets/SquadaOne-Regular.ttf");
 }
 
 function setup() {
@@ -92,14 +92,14 @@ function draw() {
 
 		fill(200);
 		textSize(80);
-		textFont(fontTitle);
+		// textFont(fontTitle);
 		text("Battle Tanks", windowWidth/2 -200, 70);
 
 		rect(100,100, windowWidth - 200, windowHeight - 200);
 
 		fill(0);
 		textSize(40);
-		textFont(fontOther);
+		// textFont(fontOther);
 		text("Instructions", windowWidth/2 - 90, 135);
 		rect(windowWidth/2 - 300, 145, 600, 5);
 
@@ -156,7 +156,7 @@ function draw() {
 
 		fill(200);
 		textSize(80);
-		textFont(fontTitle);
+		// textFont(fontTitle);
 		text("Battle Tanks", windowWidth/2 -200, 70);
 
 		//rectangle box
@@ -234,7 +234,7 @@ function draw() {
 
 		fill(200);
 		textSize(80);
-		textFont(fontTitle);
+		// textFont(fontTitle);
 		text("Battle Tanks", windowWidth/2 -200, 70);
 
 		stroke(0);
@@ -242,7 +242,7 @@ function draw() {
 		rect(50,100,windowWidth - 100, windowHeight - 150);
 		strokeWeight(1);
 
-		textFont(fontOther);
+		// textFont(fontOther);
 		textSize(200)
 
 		if(points1 == wins){
@@ -445,6 +445,37 @@ function updateValues(){ // update sketch.js variables with sensor data
 // 	});
 
 // }
+
+// get the list of ports:
+function printList(portList) {
+ // portList is an array of serial port names
+ for (var i = 0; i < portList.length; i++) {
+ // Display the list the console:
+ print(i + " " + portList[i]);
+ }
+}
+ 
+function serverConnected() {
+ print('connected to server.');
+}
+ 
+function portOpen() {
+ print('the serial port opened.')
+}
+ 
+function serialError(err) {
+ print('Something went wrong with the serial port. ' + err);
+}
+ 
+function portClose() {
+ print('The serial port closed.');
+}
+
+function closingCode(){
+  serial.close(portName);
+  return null;
+}
+
 
 
 window.onbeforeunload = closingCode;
