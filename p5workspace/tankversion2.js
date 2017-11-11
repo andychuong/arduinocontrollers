@@ -141,7 +141,7 @@ function draw() {
 
     // Update Values
     drawSprites();
-    // updateValues();
+    updateValues();
 }
 
   //Guide 1:
@@ -173,21 +173,92 @@ function serialEvent() {
       //Use sensor data here:
 
       //Player 1:
-      x1 = map(sensors[0], 0, 1024, 0, width); // element 0 is the locH
-        console.log("H :" + x1);
-      y1 = map(sensors[1], 0, 1024, 0, height); // element 1 is the locV
-        console.log("V :" + x2 + ", " + sensors[1]);
+      sensorX1 = sensors[0];
+      sensorY1 = sensors[1];
+      console.log(sensors);
+      
 
       //Player 2:
-      x2 = map(sensors[3], 0, 1024, 0, width); // element 0 is the locH
-        console.log("H :" + x1);
-      y2 = map(sensors[4], 0, 1024, 0, height); // element 1 is the locV
-        console.log("V :" + x2 + ", " + sensors[1]);
+      sensorX2 = sensors[3];
+      sensorY2 = sensors[4];
 
       }
     }
     serial.write('x'); // send a byte requesting more serial data 
   }
+}
+
+function updateValues(){ // update sketch.js variables with sensor data
+  //// Player 1 ------------
+  // X1
+  //left
+  if(sensorX1 < 470){
+    if(x1 > 90){
+      x1-=3;
+      // console.log(x1);
+    }
+  }//right
+  if(sensorX1 > 530){
+    if(x1 < windowWidth/2 - 45){
+      x1+=3;
+      // console.log(x1);
+    }
+  }
+  
+  // Y1
+  //down
+  if(sensorY1 > 530){
+    if(y1 < windowHeight - 90){
+      y1 += 3;
+      // console.log(y1);
+    }
+  }//up
+  if(sensorY1 < 470){
+    if(y1 > 140){
+      y1 -= 3;
+      // console.log(y1);
+    }
+  }
+  // Rotation 1
+  // rotation1 = map(sensorR1, 0, 1023, -90, 90);
+  // player1.rotation = rotation1;
+
+  //// Player 2 ------------
+
+  // X2
+  // left
+  if(sensorX2 < 470){
+    if(x2 > windowWidth/2 + 45){
+      x2 -= 3;
+      // console.log(x2);
+    }
+  }
+  // right
+  if(sensorX2 > 530){
+    if(x2 < windowWidth - 90){
+      x2 += 3;
+    }
+  }
+  // Y2
+  // down
+  if(sensorY2 > 530){
+    if(y2 < windowHeight -93){
+      y2 += 3;
+      // console.log(y2);
+    }
+  }
+  // up
+  if(sensorY2 < 470){
+    if(y2 > 140){
+      y2 -= 3;
+      // console.log(y1);
+    }
+  }
+  // Rotation 2
+  // rotation2 = map(sensorR2, 0, 1023, 270, 90);
+  // player2.rotation = rotation2;
+  // console.log(rotation2);
+
 }
 
 // get the list of ports:
