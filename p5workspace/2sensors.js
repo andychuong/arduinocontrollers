@@ -37,12 +37,15 @@ function serialEvent() {
         console.log("H :" + locH);
         locV = map(sensors[1], 0, 1024, 0, height); // element 1 is the locV
         console.log("V :" + locV + ", " + sensors[1]);
-        if(sensors[3] == 0){
-          // circleColor = 100;
-          serial.close(portName);
+        if(sensors[7] == 0){
+          circleColor = 100;
+          
         }
-        if(sensors[3] == 1){
+        if(sensors[7] == 1){
           circleColor = 255;
+        }
+        if(sensors[10] == 1){
+          serial.close(portName);
         }
         // circleColor = 255 - (sensors[2] * 255);      // element 2 is the button
       }
@@ -74,4 +77,15 @@ function serialError(err) {
  
 function portClose() {
  print('The serial port closed.');
+}
+
+window.onbeforeunload = closingCode;
+
+function closingCode(){
+  serial.close(portName);
+  return null;
+}
+
+function windowResized(){
+  resizeCanvas(windowWidth,windowHeight);
 }

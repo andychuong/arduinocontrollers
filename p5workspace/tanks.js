@@ -340,11 +340,11 @@ function serialEvent() {
         sensorX2 = sensors[3];
         sensorY2 = sensors[4];
 
-        //Player 2 shoot
+        //Playe  2 shoot
         if(sensors[12] == 1){
 
         }
-        
+
         //Player 2 reload
         if(sensors[13] == 1){
 
@@ -446,12 +446,14 @@ function updateValues(){ // update sketch.js variables with sensor data
 
 // }
 
+
+window.onbeforeunload = closingCode;
+
 function closingCode(){
 	serial.close(portName);
 	return null;
 }
 
-window.onbeforeunload = closingCode;
 
 function windowResized(){
 	resizeCanvas(windowWidth,windowHeight);

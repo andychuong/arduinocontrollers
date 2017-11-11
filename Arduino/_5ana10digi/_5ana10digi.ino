@@ -17,16 +17,16 @@ void setup() {
     Serial.println("hello"); // send a starting message
     delay(300);              // wait 1/3 second
   }
-  pinMode(dig2, INPUT_PULLUP);
-  pinMode(dig3, INPUT_PULLUP);
-  pinMode(dig4, INPUT_PULLUP);
-  pinMode(dig5, INPUT_PULLUP);
-  pinMode(dig6, INPUT_PULLUP);
-  pinMode(dig7, INPUT_PULLUP);
-  pinMode(dig8, INPUT_PULLUP);
-  pinMode(dig9, INPUT_PULLUP);
-  pinMode(dig10, INPUT_PULLUP);
-  pinMode(dig11, INPUT_PULLUP);
+  pinMode(dig2, INPUT);
+  pinMode(dig3, INPUT);
+  pinMode(dig4, INPUT);
+  pinMode(dig5, INPUT);
+  pinMode(dig6, INPUT);
+  pinMode(dig7, INPUT);
+  pinMode(dig8, INPUT);
+  pinMode(dig9, INPUT);
+  pinMode(dig10, INPUT);
+  pinMode(dig11, INPUT);
   
 }
 
@@ -52,44 +52,44 @@ void loop() {
       int digital5 = digitalRead(dig5);
       int digital6 = digitalRead(dig6);
         //DIGITAL Controller 2
-      int digital2 = digitalRead(dig7);
-      int digital3 = digitalRead(dig8);
-      int digital4 = digitalRead(dig9);
-      int digital5 = digitalRead(dig10);
-      int digital6 = digitalRead(dig11);
+      int digital7 = digitalRead(dig7);
+      int digital8 = digitalRead(dig8);
+      int digital9 = digitalRead(dig9);
+      int digital10 = digitalRead(dig10);
+      int digital11 = digitalRead(dig11);
       
       // print the results:
-      Serial.print(analog0);
-        Serial.print(",");
-      Serial.print(analog1);
-        Serial.print(",");
-      Serial.print(analog2);
-        Serial.print(",");
-      Serial.print(analog3);
-        Serial.print(",");
-      Serial.print(analog4);
-        Serial.print(",");
-      Serial.print(analog5);
-        Serial.print(",");
+//      Serial.print(analog0); //[0]
+//        Serial.print(",");
+//      Serial.print(analog1); //[1]
+//        Serial.print(",");
+//      Serial.print(analog2); //[2]
+//        Serial.print(",");
+//      Serial.print(analog3); //[3]
+//        Serial.print(",");
+//      Serial.print(analog4); //[4]
+//        Serial.print(",");
+//      Serial.print(analog5); //[5]
+//        Serial.print(",");
   
-      Serial.print(digital2);
+      Serial.print(digital2); //[6]
         Serial.print(",");
-      Serial.print(digital3);
+      Serial.print(digital3); //[7]
         Serial.print(",");
-      Serial.print(digital4);
+      Serial.print(digital4); //[8]
         Serial.print(",");
-      Serial.print(digital5);
+      Serial.print(digital5); //[9]
         Serial.print(",");
-      Serial.print(digital6);
+      Serial.print(digital6); //[10]
         Serial.print(",");
-      Serial.print(digital7);
+      Serial.print(digital7); //[11]
         Serial.print(",");
-      Serial.print(digital8);
+      Serial.print(digital8); //[12]
         Serial.print(",");
-      Serial.print(digital9);
+      Serial.print(digital9); //[13]
         Serial.print(",");
-      Serial.print(digital10);
-        Serial.print(",");
-      Serial.println(digital11);
+      Serial.println(digital10); //[14]
+//        Serial.print(",");
+//      Serial.println(digital11); //[15]
   }
 }
