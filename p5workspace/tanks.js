@@ -60,7 +60,7 @@ function setup() {
 	// Player 1
 	ready1 = false;
 	player1 = createSprite(400, 200, 50, 50);
-	// player1.shapeColor = 'blue';
+	player1.shapeColor = 'blue';
 	// blueTank = loadImage("assets/bluetank_small.png");
 	// player1.addImage(blueTank);
 	x1 = 90;
@@ -73,13 +73,14 @@ function setup() {
 	player2 = createSprite(400, 200, 50, 50);
 	// greenTank = loadImage("assets/greentank_small.png");
 	// greenTank2 = loadImage("assets/greentank_small2.png");
-	// player2.addImage(greenTank);
+	player2.addImage(greenTank);
 	// player2.shapeColor = 'red';
 	x2 = windowWidth - 90;
 	y2 = windowHeight -93;
 	bullets2 = new Group();
 	points2 = 0;
 
+	// heart = loadImage("assets/heart.png");
 
 }
 
@@ -386,8 +387,8 @@ function updateValues(){ // update sketch.js variables with sensor data
 		}
 	}
 	// Rotation 1
-	rotation1 = map(sensorR1, 0, 1023, -90, 90);
-	player1.rotation = rotation1;
+	// rotation1 = map(sensorR1, 0, 1023, -90, 90);
+	// player1.rotation = rotation1;
 
 	//// Player 2 ------------
 
@@ -421,8 +422,8 @@ function updateValues(){ // update sketch.js variables with sensor data
 		}
 	}
 	// Rotation 2
-	rotation2 = map(sensorR2, 0, 1023, 270, 90);
-	player2.rotation = rotation2;
+	// rotation2 = map(sensorR2, 0, 1023, 270, 90);
+	// player2.rotation = rotation2;
 	// console.log(rotation2);
 
 }
