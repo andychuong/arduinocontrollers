@@ -1,7 +1,8 @@
 //Serial Variables
 var serial;          // variable to hold an instance of the serialport library
-var portName = 'COM5';  // fill in your serial port name here
+var portName = 'COM9';  // fill in your serial port name here
 
+//Global Game Variables ---------------
 var sensorX1;
 var sensorY1;
 var sensorR1;
@@ -30,7 +31,11 @@ var points2;
 var bullets2;
 var hearts2;
 
-//Global Game Variables ---------------
+var wins;
+var gameState;
+// 0 = start screen
+// 1 = in progress
+// 2 = end 
 
 
 //Setup Function ----------------------
@@ -55,14 +60,19 @@ function setup() {
   x1 = 90;
   y1 = 140;
   points1 = 0;
+  bullets1 = new Group();
 
   // Player 2
   ready2 = false;
   player2 = createSprite(400, 200, 50, 50);
-  player2.shapeColor = 'green';
+  // player2.shapeColor = 'green';
+  greenTank = loadImage("assets/greentank_small.png");
+  greenTank2 = loadImage("assets/greentank_small2.png");
+  player2.addImage(greenTank);
   x2 = windowWidth - 90;
   y2 = windowHeight -93;
   points2 = 0;
+  bullets2 = new Group();
 
 
 }
@@ -92,13 +102,13 @@ function draw() {
     player1.position.y = y1;
 
     // Player 1 Shooting @@@@@@@@@@@
-    if(keyWentDown("x")){
-      // console.log('x');
-        // var bullet1 = createSprite(player1.position.x, player1.position.y, 10, 10);
-        // bullet1.setSpeed(10+player1.getSpeed(), player1.rotation);
-        // bullet1.life = 160;
-        // bullet1.shapeColor = 'black';
-        // bullets1.add(bullet1);
+    if(keyWentDown("c")){
+      console.log('1 shoot');
+        var bullet1 = createSprite(player1.position.x, player1.position.y, 10, 10);
+        bullet1.setSpeed(10+player1.getSpeed(), player1.rotation);
+        bullet1.life = 160;
+        bullet1.shapeColor = 'black';
+        bullets1.add(bullet1);
       }
      
       // Player 2 Location
@@ -106,7 +116,7 @@ function draw() {
     player2.position.y = y2;
 
     // Player 2 Shooting @@@@@@@@@@@
-      if(keyWentDown("c")){
+      if(keyWentDown("f")){
         // console.log('c pressed');
       //   var bullet2 = createSprite(player2.position.x, player2.position.y, 10, 10);
       //   bullet2.setSpeed(10+player2.getSpeed(), player2.rotation);
@@ -148,17 +158,17 @@ function draw() {
   //A0 ~ [0]: Horiz (x)
   //A1 ~ [1]: Verti (y)
   //D2 ~ [6]: Joystick Button - ??
-  //D3 ~ [7]: Blue Button (Shoot)
-  //D4 ~ [8]: Red Button (Reload)
-  //D5 ~ [9]: Small Button (Reset)
+  //D3 ~ [7]: Small Button ( - )
+  //D4 ~ [8]: Blue Button (Shoot)
+  //D5 ~ [9]: Red Button (Reload) 
 
   //Guide 2:
   //A3 ~ [3]: Horiz (x)
   //A4 ~ [4]: Verti (y)
   //D7 ~ [11]: Joystick Button - ??
-  //D8 ~ [12]: Blue Button (Shoot)
-  //D9 ~ [13]: Red Button (Reload)
-  //D10 ~ [14]: Small Button (Reset)
+  //D8 ~ [12]: Small Buttom ( - )
+  //D9 ~ [13]: Small Button (Reset)
+  //D10 ~ [14]: Red Button (Reload)
 
 //Interpret serial data here ----------
 function serialEvent() {
@@ -175,7 +185,12 @@ function serialEvent() {
       //Player 1:
       sensorX1 = sensors[0];
       sensorY1 = sensors[1];
-      console.log(sensors);
+      // console.log(sensors);
+      sensorS1 = sensors[8];
+      // console.log(sensors[8]);
+      // console.log(sensors);
+
+
       
 
       //Player 2:
