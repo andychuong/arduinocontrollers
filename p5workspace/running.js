@@ -1,15 +1,28 @@
 //Serial Variables
 var serial;          // variable to hold an instance of the serialport library
-var portName = 'COM5';  // fill in your serial port name here
+var portName = 'COM4';  // fill in your serial port name here
 
 //Global Game Variables ---------------
+var MIN_OPENING = 150;
+
 var y1;
 var x1;
+var s1;
 
+var player1;
+var boxes;
+var numboxes;
+var ground;
+
+var spacingCounter;
+var maxPipes;
+
+var gameOver;
+var startGame;
 
 //Setup Function ----------------------
 function setup() {
-  createCanvas(640, 480);
+  createCanvas(1200, 600);
   serial = new p5.SerialPort();       // make a new instance of the serialport library
   serial.on('list', printList);       // set a callback function for the serialport list event
   serial.on('connected', serverConnected); // callback for connecting to the server
@@ -19,11 +32,104 @@ function setup() {
   serial.on('close', portClose);      // callback for the port closing
   serial.list();                      // list the serial ports
   serial.open(portName);              // open a serial port
+
+
+  player1 = createSprite(100, height/2 + 20, 40,40);
+  player1.shapeColor = 'white';
+  player1.rotateToDirection = true;
+
+  // player1.addImage();
+  numboxes = 0;
+  spacingCounter = 0;
+  maxPipes = 2;
+
+  // ground = createSprite(800/2, GROUND_Y+100); 
+
+  boxes = new Group();
+  gameOver = false;
+  startGame = true;
+  updateSprites(false);
+
+  // camera.position.y = height/2;
 }
 
 //Draw Function -----------------------
 function draw() {
- background(0); // black background
+  background(0, 134, 255);
+
+  if(gameOver && s1 == 1)//Restart game
+    newGame();
+
+  if(!gameOver){//Run game
+
+    player1.position.y = y1
+    // console.log("Player 1 Y: " + player1.position.y);
+
+    if(player1.overlap(boxes)){
+      die();
+    }
+    // var box2 = createSprite(800, 80, 80, 200);
+    // console.log("newbox");
+    //createSprite(x,y,w,h);
+    //x = middle
+    //y = middle
+
+    // var boxH = random(50,300);
+    if(boxes.length <= maxPipes){
+      if(spacingCounter > 280 || startGame){
+        console.log(spacingCounter);
+        console.log(maxPipes);
+      var boxH = random(20,300);
+      var boxT = createSprite(width, boxH/2, 80, boxH);
+      // console.log(width);
+      boxT.shapeColor = 'black';
+      boxes.add(boxT);
+
+      var boxH2 = height - boxH - MIN_OPENING;
+      var boxB = createSprite(width, boxH + MIN_OPENING + (boxH2 / 2), 80, boxH2);
+      // console.log("height: " + height);
+      boxB.shapeColor = 'black';
+      boxes.add(boxB);
+
+      startGame = false;
+    }
+    }
+
+    //get rid of passed pipes
+    for(var i = 0; i<boxes.length; i++){
+      if(boxes[i].position.x < player1.position.x-width/2){
+        boxes[i].remove();
+      }
+      boxes[i].position.x -= 5;
+      if(spacingCounter < 300){
+        spacingCounter += 5;
+      }
+      else{
+        spacingCounter = 0;
+        if(maxPipes < 6){
+          maxPipes ++;
+        }
+      }
+    }
+    // console.log(boxes);
+  }
+
+  drawSprites();
+}
+
+function die() {
+  updateSprites(false);
+  gameOver = true;   
+}
+
+function newGame() {
+  boxes.removeSprites();
+  gameOver = false;
+  updateSprites(true);
+  player1.position.x = 100;
+  player1.position.y = height/2 + 20;
+  startGame = true;
+
 }
 
   //Guide 1:
@@ -33,17 +139,6 @@ function draw() {
   //D3 ~ [7]: Small Center Button (Pause) ~ purple
   //D4 ~ [8]: 
   //D5 ~ [9]: 
-
-  //Guide 2:
-  //A3 ~ [3]: Horiz (x) ~ orange
-  //A4 ~ [4]: Verti (y) ~ yellow
-  //D7 ~ [11]: 
-  //D8 ~ [12]: Small Center Button (Pause) ~ purple
-  //D9 ~ [13]: 
-  //D10 ~ [14]: 
-
-
-
 //Interpret serial data here ----------
 function serialEvent() {
   // read a string from the serial port
@@ -51,22 +146,24 @@ function serialEvent() {
   var inString = serial.readStringUntil('\r\n');
   //check to see that there's actually a ssetring there:
   if (inString.length > 0) {
+    // console.log(inString);
     if (inString !== 'hello') {           // if you get hello, ignore it
       var sensors = split(inString, ','); // split the string on the commas
-      if (sensors.length > 16) {           // if there are sixteen elements (6 analog, 10 digital)
+      if (sensors.length > 2) {           // if there are sixteen elements (6 analog, 10 digital)
       //Use sensor data here:
 
       //Player 1
-        x1 = map(sensors[0], 0, 1024, 0, width);
-        y1 = map(sensors[1], 0, 1024, 0, height);
+        x1 = map(sensors[0], 0, 1023, 0, width);
+        // console.log("sensors[1]: " + sensors[1]);
+        y1 = map(sensors[1], 0, 1023, 0, height);
 
-      //Player 2
-        x2 = map(sensors[3], 0, 1024, 0, width);
-        y2 = map(sensors[4], 0, 1024, 0, height);
+        s1 = sensors[7];
 
       }
     }
-    serial.write('x'); // send a byte requesting more serial data 
+
+    serial.write('z'); // send a byte requesting more serial data 
+    
   }
 }
 
