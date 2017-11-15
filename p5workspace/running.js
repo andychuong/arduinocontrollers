@@ -3,11 +3,12 @@ var serial;          // variable to hold an instance of the serialport library
 var portName = 'COM4';  // fill in your serial port name here
 
 //Global Game Variables ---------------
-var MIN_OPENING = 150;
+var MIN_OPENING = 250;
 
 var y1;
-var x1;
+var speed;
 var s1;
+var boxesX;
 
 var player1;
 var boxes;
@@ -37,6 +38,8 @@ function setup() {
   player1 = createSprite(100, height/2 + 20, 40,40);
   player1.shapeColor = 'white';
   player1.rotateToDirection = true;
+
+  boxesX = width;
 
   // player1.addImage();
   numboxes = 0;
@@ -68,6 +71,22 @@ function draw() {
     if(player1.overlap(boxes)){
       die();
     }
+
+    if(frameCount%30 == 0) {
+      var boxH = random(20,350);
+      var boxT = createSprite(player1.position.x + width, boxH/2, 80, boxH);
+      // console.log(width);
+      boxT.shapeColor = 'black';
+      boxes.add(boxT);
+
+      var boxH2 = height - boxH - MIN_OPENING;
+      var boxB = createSprite(player1.position.x + width, boxH + MIN_OPENING + (boxH2 / 2), 80, boxH2);
+      boxB.shapeColor = 'black';
+      boxes.add(boxB);
+    }
+
+
+
     // var box2 = createSprite(800, 80, 80, 200);
     // console.log("newbox");
     //createSprite(x,y,w,h);
@@ -75,41 +94,57 @@ function draw() {
     //y = middle
 
     // var boxH = random(50,300);
-    if(boxes.length <= maxPipes){
-      if(spacingCounter > 280 || startGame){
-        console.log(spacingCounter);
-        console.log(maxPipes);
-      var boxH = random(20,300);
-      var boxT = createSprite(width, boxH/2, 80, boxH);
-      // console.log(width);
-      boxT.shapeColor = 'black';
-      boxes.add(boxT);
 
-      var boxH2 = height - boxH - MIN_OPENING;
-      var boxB = createSprite(width, boxH + MIN_OPENING + (boxH2 / 2), 80, boxH2);
-      // console.log("height: " + height);
-      boxB.shapeColor = 'black';
-      boxes.add(boxB);
+    // if(boxes.length <= maxPipes){
+    //   if(spacingCounter > 280 || startGame){
+    //     console.log(spacingCounter);
+    //     console.log(maxPipes);
+    //     var boxH = random(20,300);
+    //     var boxT = createSprite(width, boxH/2, 80, boxH);
+    //    // console.log(width);
+    //     boxT.shapeColor = 'black';
+    //     boxes.add(boxT);
 
-      startGame = false;
-    }
-    }
+    //     var boxH2 = height - boxH - MIN_OPENING;
+    //     var boxB = createSprite(width, boxH + MIN_OPENING + (boxH2 / 2), 80, boxH2);
+    //     boxB.shapeColor = 'black';
+    //     boxes.add(boxB);
+
+    //     startGame = false;
+    //   }
+    // }
+    // if(startGame){
+    // for(var j = 0; j < 5; j++){
+
+    //     var boxH = random(20,300);
+    //     var boxT = createSprite(width + (160 * j) + (80 * j), boxH/2, 80, boxH);
+    //    // console.log(width);
+    //     boxT.shapeColor = 'black';
+    //     boxes.add(boxT);
+
+    //     var boxH2 = height - boxH - MIN_OPENING;
+    //     var boxB = createSprite(width + (160 * j) + (80 * j), boxH + MIN_OPENING + (boxH2 / 2), 80, boxH2);
+    //     boxB.shapeColor = 'black';
+    //     boxes.add(boxB);
+    //     startGame = false;
+    // }
+    // }
+
 
     //get rid of passed pipes
     for(var i = 0; i<boxes.length; i++){
+      boxes[i].position.x -= 5 + (1 * speed);
       if(boxes[i].position.x < player1.position.x-width/2){
         boxes[i].remove();
       }
-      boxes[i].position.x -= 5;
-      if(spacingCounter < 300){
-        spacingCounter += 5;
-      }
-      else{
-        spacingCounter = 0;
-        if(maxPipes < 6){
-          maxPipes ++;
-        }
-      }
+      
+      // boxesX -=5;
+      // if(boxes[0].position.x < 0){
+      //   startGame = true;
+      //   console.log(boxesX);
+      //   boxesX = width;
+      // }
+
     }
     // console.log(boxes);
   }
@@ -153,7 +188,7 @@ function serialEvent() {
       //Use sensor data here:
 
       //Player 1
-        x1 = map(sensors[0], 0, 1023, 0, width);
+        speed = map(sensors[0], 0, 1023, 1, 10);
         // console.log("sensors[1]: " + sensors[1]);
         y1 = map(sensors[1], 0, 1023, 0, height);
 
