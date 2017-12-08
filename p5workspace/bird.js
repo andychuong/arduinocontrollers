@@ -43,7 +43,7 @@ function draw() {
 
   if(!gameOver) {
 
-    if(keyWentDown("x"))
+    if(keyWentDown("x")) 
       bird.velocity.y = FLAP;
     
     bird.velocity.y += GRAVITY;

@@ -1,10 +1,16 @@
-//pong clone
-//mouse to control both paddles
-var portName = 'COM3';
+var serial;
+var portName = 'COM7';
+
+//Game
 var paddleA, paddleB, ball, wallTop, wallBottom;
 var MAX_SPEED = 10;
 var globalX;
 var globalY;
+
+var paddle1x;
+var paddle1y;
+var paddle2x;
+var paddle2y;
 
 function setup() {
   createCanvas(800,400);
@@ -43,8 +49,8 @@ function draw() {
   background(0);
   
   // paddleA.position.y = constrain(mouseY, paddleA.height/2, height-paddleA.height/2);
-  paddleA.position.y = globalY;
-  paddleB.position.y = constrain(mouseY, paddleA.height/2, height-paddleA.height/2);
+  paddleA.position.y = paddle1y;
+  paddleB.position.y = paddle2y;
   
   ball.bounce(wallTop);
   ball.bounce(wallBottom);
@@ -83,17 +89,13 @@ function serialEvent() {
   if (inString.length > 0) {
     if (inString !== 'hello') {           // if you get hello, ignore it
       var sensors = split(inString, ','); // split the string on the commas
-      if (sensors.length > 2) {           // if there are three elements
-        globalX = map(sensors[0], 0, 1024, 0, width); // element 0 is the locH
-        // console.log("H :" + locH);
-        globalY = map(sensors[1], 0, 1024, 0, height); // element 1 is the locV
-        console.log("V :" + globalY + ", " + sensors[1]);
-        if(sensors[2] == 0){
-          circleColor = 100;
-        }
-        if(sensors[2] == 1){
-          circleColor = 255;
-        }
+      if (sensors.length > 15) {           // if there are three elements
+        // paddle1x = map(sensors[0], 0, 1023, 0, height);
+        paddle1y = map(sensors[1], 0, 1023, 0, height);
+
+        // paddle2x = sensors[3];
+        paddle2y = map(sensors[4], 0 , 1023, 0, height);        
+      }
         // circleColor = 255 - (sensors[2] * 255);      // element 2 is the button
       }
     }
@@ -125,3 +127,11 @@ function serialError(err) {
 function portClose() {
  print('The serial port closed.');
 }
+
+
+function closingCode(){
+  serial.close(portName);
+  return null;
+}
+
+window.onbeforeunload = closingCode;

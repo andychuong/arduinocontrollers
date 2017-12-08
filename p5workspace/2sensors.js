@@ -1,5 +1,5 @@
 var serial;          // variable to hold an instance of the serialport library
-var portName = 'COM5';  // fill in your serial port name here
+var portName = 'COM7';  // fill in your serial port name here
 var locH = 50;
 var locV = 50;      // location of the circle
 var circleColor = 255; // color of the circle
@@ -45,7 +45,7 @@ function serialEvent() {
           circleColor = 255;
         }
         if(sensors[10] == 1){
-          // serial.close(portName);
+          serial.close(portName);
         }
         // circleColor = 255 - (sensors[2] * 255);      // element 2 is the button
       }

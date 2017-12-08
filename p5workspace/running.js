@@ -1,6 +1,6 @@
 //Serial Variables
 var serial;          // variable to hold an instance of the serialport library
-var portName = 'COM4';  // fill in your serial port name here
+var portName = 'COM7';  // fill in your serial port name here
 
 //Global Game Variables ---------------
 var MIN_OPENING = 250;
@@ -188,7 +188,7 @@ function serialEvent() {
       //Use sensor data here:
 
       //Player 1
-        speed = map(sensors[0], 0, 1023, 1, 10);
+        speed = map(sensors[0], 0, 1023, 1, 10); //speed, shouldn't be changed during a game.
         // console.log("sensors[1]: " + sensors[1]);
         y1 = map(sensors[1], 0, 1023, 0, height);
 

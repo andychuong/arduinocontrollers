@@ -17,6 +17,7 @@ void setup() {
     Serial.println("hello"); // send a starting message
     delay(300);              // wait 1/3 second
   }
+  
   pinMode(dig2, INPUT);
   pinMode(dig3, INPUT);
   pinMode(dig4, INPUT);
@@ -49,6 +50,7 @@ void loop() {
       int digital2 = digitalRead(dig2);
       int digital3 = digitalRead(dig3);
       int digital4 = digitalRead(dig4);
+
       int digital5 = digitalRead(dig5);
       int digital6 = digitalRead(dig6);
         //DIGITAL Controller 2
@@ -58,7 +60,7 @@ void loop() {
       int digital10 = digitalRead(dig10);
       int digital11 = digitalRead(dig11);
       
-      // print the results:
+//       print the results:
       Serial.print(analog0); //[0]
         Serial.print(",");
       Serial.print(analog1); //[1]
@@ -88,7 +90,7 @@ void loop() {
         Serial.print(",");
       Serial.print(digital9); //[13]
         Serial.print(",");
-      Serial.print(digital10); //[14]
+      Serial.println(digital10); //[14]
         Serial.print(",");
       Serial.println(digital11); //[15]
   }

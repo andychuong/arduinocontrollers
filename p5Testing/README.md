@@ -1,2 +1,0 @@
-# serialtest
-# serialgame
